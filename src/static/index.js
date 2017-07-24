@@ -1,8 +1,8 @@
-// pull in desired CSS/SASS files
-require( './styles/main.scss' );
-var $ = jQuery = require( '../../node_modules/jquery/dist/jquery.js' );           // <--- remove if jQuery not needed
-require( '../../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js' );   // <--- remove if Bootstrap's JS not needed 
-
-// inject bundled Elm app into div#main
-var Elm = require( '../elm/Main' );
-Elm.Main.embed( document.getElementById( 'main' ) );
+const Elm = require('../elm/Main');
+let style = require('./styles/main.scss');
+const storedState = localStorage.getItem('elm-todo-save');
+const startingState = storedState ? JSON.parse(storedState) : null;
+const todomvc = Elm.Todo.fullscreen(startingState);
+todomvc.ports.setStorage.subscribe(function (state) {
+  localStorage.setItem('elm-todo-save', JSON.stringify(state));
+});

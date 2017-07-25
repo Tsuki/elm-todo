@@ -1,6 +1,8 @@
 @import "nib"
+@import "../../../node_modules/stylus-material"
+@import "base.styl"
 normalize-css()
-
+sm-init()
 .todomvc-wrapper
   visibility: visible !important
 
@@ -30,9 +32,6 @@ body
   -moz-font-smoothing: antialiased
   font-weight: 300
 
-button, input[type="checkbox"]
-  outline: none
-
 .hidden
   display: none
 
@@ -41,11 +40,11 @@ button, input[type="checkbox"]
   margin: 130px 0 40px 0
   position: relative
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1)
-  input: placeholder
-  placeholder()
-    font-style: italic
-    font-weight: 300
-    color: #e6e6e6
+  input
+    +placeholder()
+      font-style: italic
+      font-weight: 300
+      color: #e6e6e6
   h1
     position: absolute
     top: -155px
@@ -105,6 +104,7 @@ label[for='toggle-all']
     color: #737373
 
 .todo-list
+  sm-collection($vertical-padding: 0)
   margin: 0
   padding: 0
   list-style: none
@@ -120,11 +120,12 @@ label[for='toggle-all']
     &.editing
       .edit
         display: block
-        width: 506px
+        width: 504px
         padding: 13px 17px 12px 17px
         margin: 0 0 0 43px
       .view
         display: none
+
     .toggle
       text-align: center
       width: 40px
@@ -137,9 +138,9 @@ label[for='toggle-all']
       -webkit-appearance: none
       appearance: none
       &:after
-        content: inline-url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#ededed" stroke-width="3"/></svg>')
+        content: url("../img/check.svg")
       &:checked:after
-        content: inline-url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="-10 -18 100 135"><circle cx="50" cy="50" r="50" fill="none" stroke="#bddad5" stroke-width="3"/><path fill="#5dc2af" d="M72 25L42 71 27 56l-4 4 20 20 34-52z"/></svg>')
+        content: url("../img/checked.svg")
     label
       white-space: pre-line
       word-break: break-all
@@ -152,8 +153,10 @@ label[for='toggle-all']
       color: #d9d9d9
       text-decoration: line-through
     .destroy
+      sm-button($bgcolor: transparent)
       display: none
       position: absolute
+      padding: 0
       top: 0
       right: 10px
       bottom: 0
@@ -262,3 +265,4 @@ label[for='toggle-all']
 
   .filters
     bottom: 10px
+

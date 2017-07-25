@@ -193,6 +193,7 @@ view model =
             , lazy2 viewEntries model.visibility model.entries
             , lazy2 viewControls model.visibility model.entries
             ]
+        , infoFooter
         ]
 
 
@@ -200,10 +201,10 @@ viewInput : String -> Html Msg
 viewInput task =
     header
         [ class "header" ]
-        [ h1 [] [ text "todos" ]
+        [ h1 [] [ text "Elm-Todos" ]
         , input
             [ class "new-todo"
-            , placeholder "What needs to be done?"
+            , placeholder "Insert a new todo"
             , autofocus True
             , value task
             , name "newTodo"
@@ -385,4 +386,18 @@ viewControlsClear entriesCompleted =
         , onClick DeleteComplete
         ]
         [ text ("Clear completed (" ++ toString entriesCompleted ++ ")")
+        ]
+
+
+infoFooter : Html msg
+infoFooter =
+    footer [ class "info" ]
+        [ p []
+            [ text "Written by "
+            , a [ href "https://github.com/Tsuki" ] [ text "Tsuki" ]
+            ]
+        , p []
+            [ text "Impressed by"
+            , a [ href "https://github.com/evancz" ] [ text "Evan Czaplicki" ]
+            ]
         ]

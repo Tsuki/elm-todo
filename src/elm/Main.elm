@@ -1,13 +1,5 @@
 port module Todo exposing (..)
 
-{-| TodoMVC implemented in Elm, using plain HTML and CSS for rendering.
-This application is broken up into three key parts:
-  1. Model  - a full definition of the application's state
-  2. Update - a way to step the application state forward
-  3. View   - a way to visualize our application state with HTML
-This clean division of concerns is a core part of Elm. You can read more about
-this in <http://guide.elm-lang.org/architecture/index.html>
--}
 
 import Dom
 import Html exposing (..)
@@ -33,9 +25,6 @@ main =
 port setStorage : Model -> Cmd msg
 
 
-{-| We want to `setStorage` on every update. This function adds the setStorage
-command for every step of the update function.
--}
 updateWithStorage : Msg -> Model -> ( Model, Cmd Msg )
 updateWithStorage msg model =
     let
@@ -51,7 +40,6 @@ updateWithStorage msg model =
 -- MODEL
 
 
--- The full application state of our todo app.
 type alias Model =
     { entries : List Entry
     , field : String
@@ -95,10 +83,6 @@ init savedModel =
 -- UPDATE
 
 
-{-| Users of our app can trigger messages by clicking and typing. These
-messages are fed into the `update` function as they occur, letting us react
-to them.
--}
 type Msg
     = NoOp
     | UpdateField String
@@ -401,19 +385,4 @@ viewControlsClear entriesCompleted =
         , onClick DeleteComplete
         ]
         [ text ("Clear completed (" ++ toString entriesCompleted ++ ")")
-        ]
-
-
-infoFooter : Html msg
-infoFooter =
-    footer [ class "info" ]
-        [ p [] [ text "Double-click to edit a todo" ]
-        , p []
-            [ text "Written by "
-            , a [ href "https://github.com/evancz" ] [ text "Evan Czaplicki" ]
-            ]
-        , p []
-            [ text "Part of "
-            , a [ href "http://todomvc.com" ] [ text "TodoMVC" ]
-            ]
         ]
